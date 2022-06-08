@@ -51,12 +51,12 @@ int main(void)
 //        servo_pulse(SERVO1,servo1Pos);
         
         // Read pushbuttons and adjust servo position
-        if(SW5 == 0 && servo1_pos > 0)
+        if(SW3 == 0 && servo1_pos > 0)
         {
             servo1_pos --;
         }
         
-        if(SW4 == 0 && servo1_pos < 255)
+        if(SW2 == 0 && servo1_pos < 255)
         {
             servo1_pos ++;
         }
