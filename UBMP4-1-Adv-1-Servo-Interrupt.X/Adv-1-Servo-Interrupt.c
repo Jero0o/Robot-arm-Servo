@@ -19,7 +19,7 @@
 // Program variable definitions
 unsigned char servo1_pos = 128; // Servo 1 position variable
 unsigned char timerPeriods = 3; // Interrupt timer periods counter (x5ms)
-
+unsigned char servo2_pos = 128;
 // Servo interrupt function using TMR0 to count 5ms intervals and generate 
 // a new servo pulse every 15ms.
 void __interrupt() servo(void)
@@ -33,6 +33,7 @@ void __interrupt() servo(void)
         {
             timerPeriods = 3;   // Reset timer period to 15ms servo pulse period
             servo_pulse(SERVO1, servo1_pos);    // Update servo1 position
+            servo_pulse(SERVO2, servo2_pos);
         }
 	}
 }
@@ -43,7 +44,7 @@ int main(void)
     UBMP4_config();             // Configure on-board UBMP4 I/O devices
     
     // Servo output pin configuration
-    TRISC = 0b00001110;         // Set H1 as output for Servo1
+    TRISC = 0b11110000;         // Set H1 as output for Servo1
 	
     while(1)
 	{
@@ -60,6 +61,16 @@ int main(void)
         {
             servo1_pos ++;
         }
+
+        if(SW5 == 0 && servo2_pos > 0)
+        {
+            servo2_pos --;
+        }
+
+        if(SW4 == 0 && servo2_pos < 255)
+        {
+            servo2_pos ++;
+        } 
         
 //        // Delay between servo pulses
 //        __delay_ms(15);
@@ -79,3 +90,5 @@ int main(void)
  * 
  * 1. 
  */
+ //H2OUT = 0
+//H1OUT = 0
