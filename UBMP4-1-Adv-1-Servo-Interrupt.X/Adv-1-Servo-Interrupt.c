@@ -20,6 +20,8 @@
 unsigned char servo1_pos = 128; // Servo 1 position variable
 unsigned char timerPeriods = 3; // Interrupt timer periods counter (x5ms)
 unsigned char servo2_pos = 128;
+unsigned char servo3_pos = 0;
+unsigned char servo4_pos = 0;
 // Servo interrupt function using TMR0 to count 5ms intervals and generate 
 // a new servo pulse every 15ms.
 void __interrupt() servo(void)
@@ -34,6 +36,8 @@ void __interrupt() servo(void)
             timerPeriods = 3;   // Reset timer period to 15ms servo pulse period
             servo_pulse(SERVO1, servo1_pos);    // Update servo1 position
             servo_pulse(SERVO2, servo2_pos);
+            servo_pulse(SERVO3, servo3_pos);
+            servo_pulse(SERVO4, servo4_pos);
         }
 	}
 }
@@ -72,6 +76,26 @@ int main(void)
             servo2_pos ++;
         } 
         
+        if(H6IN == 1 && servo3_pos > 0)
+        {
+            servo3_pos ++;
+        }
+
+        if(H5IN == 1 && servo3_pos < 255)
+        {
+            servo3_pos --;
+        }
+
+        if(H8IN == 1 && servo4_pos > 0)
+        {
+            servo4_pos ++;
+        }
+
+        if(H7IN == 1 && servo4_pos < 255)
+        {
+            servo4_pos --;
+        }
+
 //        // Delay between servo pulses
 //        __delay_ms(15);
         
