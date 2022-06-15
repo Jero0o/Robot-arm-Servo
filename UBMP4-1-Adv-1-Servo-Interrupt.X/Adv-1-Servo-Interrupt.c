@@ -76,7 +76,7 @@ int main(void)
             servo2_pos ++;
         } 
         
-        if(H6IN == 1 && servo3_pos > 0)
+        if(H6IN == 1 && servo3_pos > 0)   //these pins increment fast, add a delay after the delay to make it slow.
         {
             servo3_pos ++;
         }
@@ -101,6 +101,8 @@ int main(void)
         
         // Delay between pushbutton updates
         __delay_ms(4);
+
+        __delay_ms(10);
         
         // Activate bootloader if SW1 is pressed.
         if(SW1 == 0)
