@@ -17,7 +17,7 @@
 // TODO Set linker code offset to '800' under "Additional options" pull-down.
 
 // Program variable definitions
-unsigned char servo1_pos = 128; // Servo 1 position variable
+unsigned char servo1_pos = 0; // Servo 1 position variable
 unsigned char timerPeriods = 3; // Interrupt timer periods counter (x5ms)
 unsigned char servo2_pos = 128;
 unsigned char servo3_pos = 0;
@@ -34,7 +34,7 @@ void __interrupt() servo(void)
         if(timerPeriods == 0)
         {
             timerPeriods = 3;   // Reset timer period to 15ms servo pulse period
-            servo_pulse(SERVO1, servo1_pos);    // Update servo1 position
+            servo_pulseHS322HD(SERVO1, servo1_pos);    // Update servo1 position
             servo_pulse(SERVO2, servo2_pos);
             servo_pulse(SERVO3, servo3_pos);
             servo_pulse(SERVO4, servo4_pos);
@@ -100,9 +100,9 @@ int main(void)
 //        __delay_ms(15);
         
         // Delay between pushbutton updates
-        __delay_ms(4);
+        __delay_ms(2);
 
-        __delay_ms(10);
+
         
         // Activate bootloader if SW1 is pressed.
         if(SW1 == 0)
