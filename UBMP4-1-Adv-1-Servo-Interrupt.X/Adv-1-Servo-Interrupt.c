@@ -19,7 +19,7 @@
 // Program variable definitions
 unsigned char servo1_pos = 0; // Servo 1 position variable
 unsigned char timerPeriods = 3; // Interrupt timer periods counter (x5ms)
-unsigned char servo2_pos = 128;
+unsigned char servo2_pos = 0;
 unsigned char servo3_pos = 0;
 unsigned char servo4_pos = 0;
 // Servo interrupt function using TMR0 to count 5ms intervals and generate 
@@ -35,8 +35,8 @@ void __interrupt() servo(void)
         {
             timerPeriods = 3;   // Reset timer period to 15ms servo pulse period
             servo_pulseHS322HD(SERVO1, servo1_pos);    // Update servo1 position
-            servo_pulse(SERVO2, servo2_pos);
-            servo_pulse(SERVO3, servo3_pos);
+            servo_pulseMG995(SERVO2, servo2_pos);
+            servo_pulseParallax(SERVO3, servo3_pos);
             servo_pulse(SERVO4, servo4_pos);
         }
 	}
@@ -102,8 +102,9 @@ int main(void)
         // Delay between pushbutton updates
         __delay_ms(2);
 
+        __delay_ms(10);
 
-        
+
         // Activate bootloader if SW1 is pressed.
         if(SW1 == 0)
         {
