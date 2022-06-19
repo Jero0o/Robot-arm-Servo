@@ -34,9 +34,9 @@ void __interrupt() servo(void)
         if(timerPeriods == 0)
         {
             timerPeriods = 3;   // Reset timer period to 15ms servo pulse period
-            servo_pulseHS322HD(SERVO1, servo1_pos);    // Update servo1 position
-            servo_pulseMG995(SERVO2, servo2_pos);
-            servo_pulseParallax(SERVO3, servo3_pos);
+            servo_pulseMG995(SERVO1, servo1_pos);    // Update servo1 position
+            servo_pulseParallax(SERVO2, servo2_pos);
+            servo_pulseMG9951(SERVO3, servo3_pos);
             servo_pulse(SERVO4, servo4_pos);
         }
 	}
@@ -100,9 +100,8 @@ int main(void)
 //        __delay_ms(15);
         
         // Delay between pushbutton updates
-        __delay_ms(2);
+        __delay_ms(4);
 
-        __delay_ms(10);
 
 
         // Activate bootloader if SW1 is pressed.
