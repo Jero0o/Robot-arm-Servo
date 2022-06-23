@@ -29,10 +29,54 @@
 void servo_pulse(unsigned char servo, unsigned char position)
 {
     PORTC = PORTC | servo;      // Set servo pin high and make fixed delay
-    __delay_us(984);            // (change this value for 180 degree servos)
+    __delay_us(984);            // (change this value for 180 degree servos) (try a range from 2000)
     for(position; position != 0; position--)   // Extend delay by position value
     {
         _delay(38);             // Clock cycle delay to make 1ms pulse (pos = 255)
+    }                           // (change clock delay to modify pulse)
+    PORTC = PORTC & (!servo);   // End pulse by resetting servo pin
+}
+
+void servo_pulseHS322HD(unsigned char servo, unsigned char position)
+{
+    PORTC = PORTC | servo;      // Set servo pin high and make fixed delay
+    __delay_us(50);            // (change this value for 180 degree servos) (try a range from 2000)
+    for(position; position != 0; position--)   // Extend delay by position value
+    {
+        _delay(90);             // Clock cycle delay to make 1ms pulse (pos = 255)
+    }                           // (change clock delay to modify pulse)
+    PORTC = PORTC & (!servo);   // End pulse by resetting servo pin
+}
+
+void servo_pulseMG995(unsigned char servo, unsigned char position)
+{
+    PORTC = PORTC | servo;      // Set servo pin high and make fixed delay
+    __delay_us(650);            // (change this value for 180 degree servos) (try a range from 2000)
+    for(position; position != 0; position--)   // Extend delay by position value
+    {
+        _delay(90);             // Clock cycle delay to make 1ms pulse (pos = 255)
+    }                           // (change clock delay to modify pulse)
+    PORTC = PORTC & (!servo);   // End pulse by resetting servo pin
+}
+
+void servo_pulseParallax(unsigned char servo, unsigned char position)
+{
+    PORTC = PORTC | servo;      // Set servo pin high and make fixed delay
+    __delay_us(650);            // (change this value for 180 degree servos) (try a range from 2000)
+    for(position; position != 0; position--)   // Extend delay by position value
+    {
+        _delay(90);             // Clock cycle delay to make 1ms pulse (pos = 255)
+    }                           // (change clock delay to modify pulse)
+    PORTC = PORTC & (!servo);   // End pulse by resetting servo pin
+}
+
+void servo_pulseMG9951(unsigned char servo, unsigned char position) //Change delays to make it behave differently
+{
+    PORTC = PORTC | servo;      // Set servo pin high and make fixed delay
+    __delay_us(984);            // (change this value for 180 degree servos) (try a range from 2000)
+    for(position; position != 0; position--)   // Extend delay by position value
+    {
+        _delay(45);             // Clock cycle delay to make 1ms pulse (pos = 255)
     }                           // (change clock delay to modify pulse)
     PORTC = PORTC & (!servo);   // End pulse by resetting servo pin
 }
